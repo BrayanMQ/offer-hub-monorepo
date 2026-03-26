@@ -7,14 +7,18 @@ import {
     Users,
     ShieldCheck,
     Zap,
-    Globe
+    Globe,
+    BarChart3,
 } from "lucide-react";
 import { cn } from "@/lib/cn";
 import EscrowFlowDiagram from "@/components/use-cases/freelance/EscrowFlowDiagram";
+import StellarImpactCards from "@/components/use-cases/freelance/StellarImpactCards";
 
+// ── Added "metrics" section to the nav ──
 const PAGE_SECTIONS = [
     { id: "overview", label: "Overview", icon: Users },
     { id: "features", label: "Features", icon: Zap },
+    { id: "metrics", label: "Metrics", icon: BarChart3 },
     { id: "architecture", label: "Architecture", icon: Globe },
 ] as const;
 
@@ -36,7 +40,6 @@ export default function UseCasesPage() {
         else linkRefs.current.delete(id);
     }, []);
 
-    /* ── Measure the active link and position the traveling indicator ── */
     const updatePillIndicator = useCallback(() => {
         const container = pillContainerRef.current;
         const activeLink = linkRefs.current.get(activeSection);
@@ -51,7 +54,6 @@ export default function UseCasesPage() {
         });
     }, [activeSection]);
 
-    /* ── IntersectionObserver: robust scroll-spy without flickering ── */
     useEffect(() => {
         const sectionElements = PAGE_SECTIONS
             .map((s) => document.getElementById(s.id))
@@ -93,7 +95,6 @@ export default function UseCasesPage() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    /* ── Scroll handler: pin detection via rAF ── */
     useEffect(() => {
         let ticking = false;
 
@@ -112,12 +113,10 @@ export default function UseCasesPage() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    /* ── Re-measure the traveling indicator whenever the active section changes ── */
     useEffect(() => {
         updatePillIndicator();
     }, [activeSection, updatePillIndicator]);
 
-    /* ── Also re-measure on resize (orientation changes, etc.) ── */
     useEffect(() => {
         const onResize = () => updatePillIndicator();
         window.addEventListener("resize", onResize, { passive: true });
@@ -133,7 +132,6 @@ export default function UseCasesPage() {
         window.scrollTo({ top, behavior: "smooth" });
     };
 
-    /* ── Touch handlers for haptic-like visual feedback ── */
     const handleTouchStart = (id: string) => setTouchedId(id);
     const handleTouchEnd = () => setTouchedId(null);
 
@@ -192,7 +190,6 @@ export default function UseCasesPage() {
                                 ref={pillContainerRef}
                                 className="relative flex items-center gap-1 sm:gap-2"
                             >
-                                {/* Traveling indicator behind the active link */}
                                 {pillStyle && (
                                     <span
                                         className="absolute top-0 h-full rounded-xl btn-neumorphic-primary pointer-events-none"
@@ -285,6 +282,17 @@ export default function UseCasesPage() {
                                 </p>
                             </div>
                         </div>
+                    </div>
+                </section>
+
+                {/* ── Metrics Section (Stellar Economic Advantage) ── */}
+                <section
+                    id="metrics"
+                    className="py-24 relative bg-transparent"
+                    style={{ scrollMarginTop: `${SCROLL_OFFSET}px` }}
+                >
+                    <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+                        <StellarImpactCards />
                     </div>
                 </section>
 
