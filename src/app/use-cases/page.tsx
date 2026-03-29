@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/cn";
 import EscrowFlowDiagram from "@/components/use-cases/freelance/EscrowFlowDiagram";
+import FreelanceHero from "@/components/use-cases/freelance/FreelanceHero";
 import StellarImpactCards from "@/components/use-cases/freelance/StellarImpactCards";
 
 // ── Added "metrics" section to the nav ──
@@ -143,34 +144,7 @@ export default function UseCasesPage() {
             <Navbar />
 
             <main>
-                {/* ── Hero / Overview Section ── */}
-                <section
-                    id="overview"
-                    className="pt-40 pb-20 relative overflow-hidden bg-transparent"
-                    style={{ scrollMarginTop: `${SCROLL_OFFSET}px` }}
-                >
-                    <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 text-center flex flex-col items-center">
-                        <div
-                            className="px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-8 shadow-neu-raised animate-fadeIn text-theme-primary bg-bg-base"
-                        >
-                            <Users size={14} className="inline mr-2.5 mb-0.5" />
-                            Freelance Marketplace
-                        </div>
-
-                        <h1
-                            className="text-5xl md:text-7xl font-black tracking-tight mb-8 animate-fadeInUp text-content-primary"
-                        >
-                            Powering the Future of <br className="hidden md:block" /> Independent Work
-                        </h1>
-
-                        <p
-                            className="text-lg md:text-xl font-medium max-w-2xl mx-auto leading-relaxed mb-12 animate-fadeInUp text-content-secondary"
-                            style={{ animationDelay: "0.1s" }}
-                        >
-                            Build a global, trustless freelance platform. Escrow funds in smart contracts, release payments upon milestone completion, and pay talent instantly across borders on Stellar.
-                        </p>
-                    </div>
-                </section>
+                <FreelanceHero />
 
                 {/* ── Sticky Navigation (Neumorphic Pill) ── */}
                 <div
